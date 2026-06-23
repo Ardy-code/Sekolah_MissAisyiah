@@ -4,7 +4,6 @@ const ArtikelSchema = new mongoose.Schema({
 
     id_artikel: {
         type: Number,
-        required: true,
         unique: true
     },
 

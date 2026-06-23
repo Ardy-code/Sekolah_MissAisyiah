@@ -1,3 +1,4 @@
+const artikelRoutes = require("./routes/artikelRoutes");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -6,17 +7,13 @@ require("dotenv").config();
 
 const app = express();
 
-const artikelRoutes =
-require("./routes/artikelRoutes");
-app.use("/api", authRoutes);
-
-app.use(
-    "/api/artikel",
-    artikelRoutes
-);
+// Middleware HARUS di atas route
 app.use(cors());
 app.use(express.json());
+
+// Routes
 app.use("/api", authRoutes);
+app.use("/api/artikel", artikelRoutes);
 
 mongoose
   .connect(process.env.MONGODB_URI)
