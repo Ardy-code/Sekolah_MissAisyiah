@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 const loginAdmin = async (req, res) => {
-
+console.log("===== MASUK LOGIN =====");
     try {
 
         const { username, password } = req.body;

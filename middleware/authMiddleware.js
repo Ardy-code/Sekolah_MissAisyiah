@@ -19,6 +19,8 @@ const verifyToken = (req, res, next) => {
             process.env.JWT_SECRET
         );
 
+       
+
         req.admin = decoded;
 
         next();

@@ -1,11 +1,20 @@
 const Artikel = require("../models/Artikel");
 
-// GET semua artikel
-const getArtikel = async (req, res) => {
+
+// GET artikel berdasarkan id_artikel
+const getArtikelById = async (req, res) => {
 
     try {
 
-        const artikel = await Artikel.find();
+        const artikel = await Artikel.findOne({
+            id_artikel: req.params.id
+        });
+
+        if (!artikel) {
+            return res.status(404).json({
+                message: "Artikel tidak ditemukan"
+            });
+        }
 
         res.status(200).json(artikel);
 
@@ -18,18 +27,66 @@ const getArtikel = async (req, res) => {
     }
 
 };
+const getArtikel = async (req, res) => {
 
-// CREATE artikel
+    try {
+
+        console.log("=== GET ARTIKEL ===");
+        console.log("Query:", req.query);
+
+        const page = Number(req.query.page) || 1;
+        const limit = Number(req.query.limit) || 5;
+        const keyword = req.query.search || "";
+
+       
+
+        const skip = (page - 1) * limit;
+
+        const artikel = await Artikel.find({
+            judul: {
+                $regex: keyword,
+                $options: "i"
+            }
+        })
+        .skip(skip)
+        .limit(limit);
+
+       
+
+        const total = await Artikel.countDocuments({
+            judul: {
+                $regex: keyword,
+                $options: "i"
+            }
+        });
+
+        res.status(200).json({
+            total,
+            page,
+            totalPage: Math.ceil(total / limit),
+            data: artikel
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+
+};
 const createArtikel = async (req, res) => {
 
     try {
 
-        const {
-            judul,
-            deskripsi,
-            upload_gambar
-        } = req.body;
+       const {
+    judul,
+    deskripsi
+} = req.body;
 
+const upload_gambar =
+    req.file ? req.file.filename : null;
         const lastArtikel = await Artikel
             .findOne()
             .sort({ id_artikel: -1 });
@@ -76,15 +133,15 @@ const updateArtikel = async (req, res) => {
 
     try {
 
-        const artikel = await Artikel.findOneAndUpdate(
-            {
-                id_artikel: req.params.id
-            },
-            req.body,
-            {
-                new: true
-            }
-        );
+     const artikel = await Artikel.findOneAndUpdate(
+    {
+        id_artikel: req.params.id
+    },
+    req.body,
+    {
+        returnDocument: "after"
+    }
+);
 
         if (!artikel) {
             return res.status(404).json({
@@ -137,6 +194,7 @@ const deleteArtikel = async (req, res) => {
 };
 
 module.exports = {
+    getArtikelById,
     getArtikel,
     createArtikel,
     updateArtikel,
