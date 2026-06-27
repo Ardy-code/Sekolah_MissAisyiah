@@ -31,8 +31,7 @@ const getArtikel = async (req, res) => {
 
     try {
 
-        console.log("=== GET ARTIKEL ===");
-        console.log("Query:", req.query);
+     
 
         const page = Number(req.query.page) || 1;
         const limit = Number(req.query.limit) || 5;

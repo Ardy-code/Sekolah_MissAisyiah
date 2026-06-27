@@ -1,22 +1,35 @@
 const mongoose = require("mongoose");
 
-const pengumumanSchema = new mongoose.Schema({
-  id_pengumuman: Number,
+const PengumumanSchema = new mongoose.Schema({
 
-  upload_gambar: String,
+    id_pengumuman: {
+        type: Number,
+        unique: true
+    },
 
-  nama_pengumuman: String,
+    upload_gambar: {
+        type: String
+    },
 
-  deskripsi: String,
+    nama_pengumuman: {
+        type: String,
+        required: true
+    },
 
-  id_admin: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "LoginAdmin"
-  }
+    deskripsi: {
+        type: String,
+        required: true
+    },
+
+    id_admin: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "LoginAdmin"
+    }
+
 });
 
 module.exports = mongoose.model(
-  "pengumuman",
-  pengumumanSchema,
-  "pengumuman"
+    "Pengumuman",
+    PengumumanSchema,
+    "pengumuman"
 );

@@ -1,30 +1,41 @@
 const mongoose = require("mongoose");
 
-const agendaSchema = new mongoose.Schema({
-  id_agenda: {
-    type: Number,
-    unique: true
-  },
+const AgendaSchema = new mongoose.Schema({
 
-  judul: String,
+    id_agenda: {
+        type: Number,
+        unique: true
+    },
 
-  deskripsi: String,
+    judul: {
+        type: String,
+        required: true
+    },
 
-  tanggal_upload: {
-    type: Date,
-    default: Date.now
-  },
+    deskripsi: {
+        type: String,
+        required: true
+    },
 
-  icon_kategori: String,
+    tanggal_agenda: {
+        type: Date,
+        required: true
+    },
 
-  id_admin: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "LoginAdmin"
-  }
+    icon_kategori: {
+        type: String,
+        required: true
+    },
+
+    id_admin: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "LoginAdmin"
+    }
+
 });
 
 module.exports = mongoose.model(
-  "agenda",
-  agendaSchema,
-  "agenda"
+    "Agenda",
+    AgendaSchema,
+    "agenda"
 );
