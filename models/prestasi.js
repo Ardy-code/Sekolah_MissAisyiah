@@ -1,28 +1,51 @@
 const mongoose = require("mongoose");
 
-const prestasiSchema = new mongoose.Schema({
-  id_prestasi: Number,
+const PrestasiSchema = new mongoose.Schema({
 
-  nama_lomba: String,
+    id_prestasi: {
+        type: Number,
+        unique: true
+    },
 
-  juara: String,
+    nama_lomba: {
+        type: String,
+        required: true
+    },
 
-  jenis_lomba: String,
+    juara: {
+        type: String,
+        required: true
+    },
 
-  tanggal_lomba: Date,
+    jenis_lomba: {
+        type: String,
+        required: true
+    },
 
-  cabang_lomba: String,
+    tahun: {
+        type: String,
+        required: true
+    },
 
-  tingkat_lomba: String,
+    cabang_lomba: {
+        type: String,
+        required: true
+    },
 
-  id_admin: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "LoginAdmin"
-  }
+    tingkat_lomba: {
+        type: String,
+        required: true
+    },
+
+    id_admin: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "LoginAdmin"
+    }
+
 });
 
 module.exports = mongoose.model(
-  "prestasi",
-  prestasiSchema,
-  "prestasi"
+    "Prestasi",
+    PrestasiSchema,
+    "prestasi"
 );

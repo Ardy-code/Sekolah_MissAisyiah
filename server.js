@@ -1,6 +1,8 @@
 const artikelRoutes = require("./routes/artikelRoutes");
 const agendaRoutes = require("./routes/agendaRoutes");
 const pengumumanRoutes = require("./routes/pengumumanRoutes");
+const prestasiRoutes = require("./routes/prestasiRoutes");
+const guruRoutes = require("./routes/guruRoutes");
 const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -26,6 +28,9 @@ app.use("/api", authRoutes);
 app.use("/api/artikel", artikelRoutes);
 app.use("/api/agenda",agendaRoutes);
 app.use("/api/pengumuman", pengumumanRoutes);
+app.use("/api/prestasi", prestasiRoutes);
+app.use("/api/guru", guruRoutes);
+
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {

@@ -1,30 +1,56 @@
 const mongoose = require("mongoose");
 
-const guruSchema = new mongoose.Schema({
-  id_informasi_guru: Number,
+const GuruSchema = new mongoose.Schema({
 
-  nama_guru: String,
+    id_guru: {
+        type: Number,
+        unique: true
+    },
 
-  jabatan: String,
+    foto_guru: {
+        type: String
+    },
 
-  jenis_kelamin: String,
+    nama_guru: {
+        type: String,
+        required: true
+    },
 
-  aktif_sejak: Number,
+    jenis_kelamin: {
+        type: String,
+        required: true
+    },
 
-  nomor_hp: String,
+    aktif_sejak: {
+        type: Number,
+        required: true
+    },
 
-  status: String,
+    nomor_hp: {
+        type: String,
+        required: true
+    },
 
-  kata_kata_guru: String,
+    status: {
+        type: String,
+        enum: ["Aktif", "Tidak Aktif"],
+        default: "Aktif"
+    },
 
-  id_admin: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "LoginAdmin"
-  }
+    kata_kata: {
+        type: String,
+        required: true
+    },
+
+    id_admin: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "LoginAdmin"
+    }
+
 });
 
 module.exports = mongoose.model(
-  "guru",
-  guruSchema,
-  "guru"
+    "Guru",
+    GuruSchema,
+    "guru"
 );
