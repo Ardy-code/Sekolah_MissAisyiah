@@ -9,6 +9,8 @@ const fasilitasSchema = new mongoose.Schema({
 
   deskripsi: String,
 
+  kondisi: String,
+
   id_admin: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "LoginAdmin"

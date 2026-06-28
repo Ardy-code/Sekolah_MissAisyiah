@@ -132,11 +132,14 @@ const updateArtikel = async (req, res) => {
 
     try {
 
+     const updateData = { ...req.body };
+     if (req.file) updateData.upload_gambar = req.file.filename;
+
      const artikel = await Artikel.findOneAndUpdate(
     {
         id_artikel: req.params.id
     },
-    req.body,
+    updateData,
     {
         returnDocument: "after"
     }

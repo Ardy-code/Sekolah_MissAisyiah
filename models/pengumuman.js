@@ -21,6 +21,10 @@ const PengumumanSchema = new mongoose.Schema({
         required: true
     },
 
+    kategori: {
+        type: String
+    },
+
     id_admin: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "LoginAdmin"
