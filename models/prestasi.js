@@ -37,6 +37,10 @@ const PrestasiSchema = new mongoose.Schema({
         required: true
     },
 
+    upload_gambar: {
+        type: String
+    },
+
     id_admin: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "LoginAdmin"

@@ -161,6 +161,9 @@ const updatePengumuman = async (req, res) => {
 
     try {
 
+        const updateData = { ...req.body };
+        if (req.file) updateData.upload_gambar = req.file.filename;
+
         const pengumuman = await Pengumuman.findOneAndUpdate(
 
             {
@@ -169,7 +172,7 @@ const updatePengumuman = async (req, res) => {
 
             },
 
-            req.body,
+            updateData,
 
             {
 
