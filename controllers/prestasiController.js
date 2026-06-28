@@ -171,24 +171,16 @@ const createPrestasi = async (req, res) => {
 const updatePrestasi = async (req, res) => {
 
     try {
-const data = {
+        const data = { ...req.body };
+        if (req.file) data.upload_gambar = req.file.filename;
 
-    ...req.body
-
-};
-
-if (req.file) {
-
-    data.upload_gambar = req.file.filename;
-
-}
         const prestasi = await Prestasi.findOneAndUpdate(
 
             {
                 id_prestasi: req.params.id
             },
 
-            req.body,
+            data,
 
             {
                 returnDocument: "after"

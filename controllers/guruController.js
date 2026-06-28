@@ -97,7 +97,10 @@ const createGuru = async (req, res) => {
             aktif_sejak,
             nomor_hp,
             status,
-            kata_kata
+            kata_kata,
+            jabatan,
+            mata_pelajaran,
+            bio
 
         } = req.body;
 
@@ -131,6 +134,12 @@ const createGuru = async (req, res) => {
             status,
 
             kata_kata,
+
+            jabatan,
+
+            mata_pelajaran,
+
+            bio,
 
             id_admin: req.admin.id
 
@@ -194,11 +203,12 @@ const updateGuru = async (req, res) => {
         guru.kata_kata =
             req.body.kata_kata || guru.kata_kata;
 
-        // Jika upload foto baru
+        if (req.body.jabatan !== undefined) guru.jabatan = req.body.jabatan;
+        if (req.body.mata_pelajaran !== undefined) guru.mata_pelajaran = req.body.mata_pelajaran;
+        if (req.body.bio !== undefined) guru.bio = req.body.bio;
+
         if (req.file) {
-
             guru.foto_guru = req.file.filename;
-
         }
 
         await guru.save();

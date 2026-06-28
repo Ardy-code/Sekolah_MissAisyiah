@@ -3,6 +3,8 @@ const agendaRoutes = require("./routes/agendaRoutes");
 const pengumumanRoutes = require("./routes/pengumumanRoutes");
 const prestasiRoutes = require("./routes/prestasiRoutes");
 const guruRoutes = require("./routes/guruRoutes");
+const fasilitasRoutes = require("./routes/fasilitasRoutes");
+const galeryRoutes = require("./routes/galeryRoutes");
 const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -26,10 +28,12 @@ app.use(
 // Routes
 app.use("/api", authRoutes);
 app.use("/api/artikel", artikelRoutes);
-app.use("/api/agenda",agendaRoutes);
+app.use("/api/agenda", agendaRoutes);
 app.use("/api/pengumuman", pengumumanRoutes);
 app.use("/api/prestasi", prestasiRoutes);
 app.use("/api/guru", guruRoutes);
+app.use("/api/fasilitas", fasilitasRoutes);
+app.use("/api/galery", galeryRoutes);
 
 mongoose
   .connect(process.env.MONGODB_URI)

@@ -21,9 +21,16 @@ const GuruSchema = new mongoose.Schema({
         required: true
     },
 
+    jabatan: {
+        type: String
+    },
+
+    mata_pelajaran: {
+        type: String
+    },
+
     aktif_sejak: {
-        type: Number,
-        required: true
+        type: String
     },
 
     nomor_hp: {
@@ -33,13 +40,17 @@ const GuruSchema = new mongoose.Schema({
 
     status: {
         type: String,
-        enum: ["Aktif", "Tidak Aktif"],
+        enum: ["Aktif", "Tidak Aktif", "Cuti", "Pensiun"],
         default: "Aktif"
     },
 
     kata_kata: {
         type: String,
         required: true
+    },
+
+    bio: {
+        type: String
     },
 
     id_admin: {
