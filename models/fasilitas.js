@@ -1,22 +1,35 @@
 const mongoose = require("mongoose");
 
 const fasilitasSchema = new mongoose.Schema({
-  id_fasilitas: Number,
 
-  upload_gambar: String,
+    id_fasilitas: {
+        type: Number,
+        unique: true
+    },
 
-  nama_fasilitas: String,
+    upload_gambar: {
+        type: String,
+        default: null
+    },
 
-  deskripsi: String,
+    nama_fasilitas: {
+        type: String,
+        required: true
+    },
 
-  id_admin: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "LoginAdmin"
-  }
+    deskripsi: {
+        type: String,
+        required: true
+    },
+
+    id_admin: {
+        type: String,
+        required: true
+    }
+
 });
 
 module.exports = mongoose.model(
-  "fasilitas",
-  fasilitasSchema,
-  "fasilitas"
+    "Fasilitas",
+    fasilitasSchema
 );
